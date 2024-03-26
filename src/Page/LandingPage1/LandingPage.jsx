@@ -1,18 +1,13 @@
-import React from 'react'
-import Header from './Header'
-import Sidebar from '../Sidebar/Sidebar'
-import SidebarItem from '../Sidebar/SidebarItem'
-import SidebarA from '../Sidebar/SidebarA'
-import NewSideBar from '../Sidebar/NewSideBar'
-import SidebarNew from '../Sidebar/SidebarNew'
-import NavSidebar from '../Sidebar/NavSidebar'
-import Layout from '../../Layout/Layout'
+import React from "react";
+import Header from "./Header";
+
+import Layout from "../../Layout/Layout";
 
 const LandingPage = () => {
   return (
-    <>        
-         {/* <Header/> */}
-        {/* <Sidebar>
+    <>
+      {/* <Header/> */}
+      {/* <Sidebar>
        
           <SidebarItem 
             icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -35,14 +30,13 @@ const LandingPage = () => {
                   </svg>} 
             text={"home"}/>
         </Sidebar> */}
-        {/* <SidebarA/> */}
-        {/* <NewSideBar/> */}
-        {/* <SidebarNew/> */}
-        {/* <NavSidebar/> */}
-        <Layout/>
+      {/* <SidebarA/> */}
+      {/* <NewSideBar/> */}
+      {/* <SidebarNew/> */}
+      {/* <NavSidebar/> */}
+      <Layout />
     </>
-    
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;
