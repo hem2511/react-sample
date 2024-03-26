@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SidebarData } from "./SidebarData";
 import { BsChevronDown } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
@@ -137,7 +138,9 @@ const Sidebar = () => {
               !open && "hidden"
             }`}
           >
-            <span className="font-medium ">Logout</span>
+            <Link to="/signin" className="font-medium ">
+              Logout
+            </Link>
           </div>
         </div>
       </nav>

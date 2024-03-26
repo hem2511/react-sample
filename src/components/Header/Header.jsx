@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -54,12 +55,12 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to="/signin"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      Sign out
-                    </a>
+                      Sign Out
+                    </Link>
                   </li>
                 </ul>
               </div>
