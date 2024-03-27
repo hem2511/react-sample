@@ -21,8 +21,8 @@ const Sidebar = () => {
           ? "w-72 transition-all duration-500"
           : " w-0 lg:w-20 transition-all duration-500"
       } bg-white border-r shadow-sm fixed lg:relative  top-0 bottom-0 z-50 ${
-        open ? "overflow-y-auto" : ""
-      }`}
+        open ? "overflow-y-auto " : ""
+      } `}
     >
       <nav className="h-full flex flex-col bg-white border-r shadow-sm ">
         <div className="p-4 pb-2 flex justify-between items-center">

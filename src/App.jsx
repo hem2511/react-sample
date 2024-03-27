@@ -9,6 +9,8 @@ import Dashboard from "./Page/Dashboard";
 import FormC from "./Page/FormC";
 import Layout from "./Layout/Layout";
 import Sidebar from "./components/Sidebar";
+import Settings from "./Page/Settings";
+import Cards from "./components/Cards";
 
 function App() {
   return (
@@ -18,10 +20,11 @@ function App() {
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/layout" element={<Layout />} />
           <Route exact path="/sidebar" element={<Sidebar />} />
-
           <Route exact path="/signin" element={<SignIn />} />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/settings" element={<Settings />} />
+          <Route exact path="/cards" element={<Cards />} />
           <Route exact path="/formc" element={<FormC />} />
         </Routes>
       </BrowserRouter>

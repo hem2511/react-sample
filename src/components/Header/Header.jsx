@@ -11,7 +11,9 @@ const Header = () => {
         <div className="w-full flex flex-wrap justify-end items-center p-4 mx-auto">
           <div className="flex flex-shrink-0 items-center space-x-4 text-black ml-3">
             <div className="text-2xl cursor-pointer hover:rotate-90 duration-500">
-              <IoSettingsOutline />
+              <Link to="/settings">
+                <IoSettingsOutline />
+              </Link>
             </div>
             <div className="flex flex-col items-end ">
               <div className="text-md font-medium ">
