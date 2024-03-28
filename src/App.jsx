@@ -11,6 +11,10 @@ import Layout from "./Layout/Layout";
 import Sidebar from "./components/Sidebar";
 import Settings from "./Page/Settings";
 import Cards from "./components/Cards";
+import UnitOfMeasure from "./components/SettingsPages/UnitOfMeasure";
+import Operation from "./components/SettingsPages/Operation";
+import Resource from "./components/SettingsPages/Resource";
+import Location from "./components/SettingsPages/Location";
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/cards" element={<Cards />} />
           <Route exact path="/formc" element={<FormC />} />
+          <Route exact path="/Uom" element={<UnitOfMeasure />} />
+          <Route exact path="/operation" element={<Operation />} />
+          <Route exact path="/resource" element={<Resource />} />
+          <Route exact path="/location" element={<Location />} />
         </Routes>
       </BrowserRouter>
     </>

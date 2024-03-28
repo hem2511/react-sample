@@ -58,8 +58,7 @@ function UnitOfMeasure() {
   };
 
   return (
-    <div className="h-max w-max bg-neutral-100 p-8 rounded-xl">
-      <div className="font-medium">Unit Of Measure</div>
+    <div className="h-max w-max p-8 rounded-xl">
       <div className="py-4">
         <table className="table-auto border-collapse border border-gray-300">
           <thead>

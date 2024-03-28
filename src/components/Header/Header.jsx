@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
+import { MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { VscGraph } from "react-icons/vsc";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -10,6 +12,11 @@ const Header = () => {
       <nav className="bg-white border-gray-200  shadow-sm border-b font-poppins ">
         <div className="w-full flex flex-wrap justify-end items-center p-4 mx-auto">
           <div className="flex flex-shrink-0 items-center space-x-4 text-black ml-3">
+            <div className="text-2xl font-light cursor-pointer hover:scale-110 duration-200">
+              <Link to="/">
+                <VscGraph />
+              </Link>
+            </div>
             <div className="text-2xl cursor-pointer hover:rotate-90 duration-500">
               <Link to="/settings">
                 <IoSettingsOutline />
