@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -7,17 +7,36 @@ import { VscGraph } from "react-icons/vsc";
 const Header = () => {
   const [open, setOpen] = useState(false);
 
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleCloseMenu = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="sticky top-0">
       <nav className="bg-white border-gray-200  shadow-sm border-b font-poppins ">
-        <div className="w-full flex flex-wrap justify-end items-center p-4 mx-auto">
+        <div className="w-full flex flex-wrap justify-end items-center p-4 mx-auto max-[400px]:text-xs">
           <div className="flex flex-shrink-0 items-center space-x-4 text-black ml-3">
-            <div className="text-2xl font-light cursor-pointer hover:scale-110 duration-200">
+            <div className="text-2  xl font-light cursor-pointer hover:scale-110 duration-200">
               <Link to="/">
                 <VscGraph />
               </Link>
             </div>
-            <div className="text-2xl cursor-pointer hover:rotate-90 duration-500">
+            <div className="text-2xl cursor-pointer hover:rotate-90 duration-500 max-[400px]:text-xs">
               <Link to="/settings">
                 <IoSettingsOutline />
               </Link>
@@ -31,17 +50,17 @@ const Header = () => {
               <img
                 src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true&name=Nandha"
                 alt="user"
-                className="w-10 h-10 rounded-full hover:scale-105 duration-150"
+                className="w-10 h-10 rounded-full hover:scale-105 duration-150 max-[400px]:w-5 max-[400px]:h-5"
               />
             </button>
           </div>
-          <div className="flex flex-col">
+          <div id="dropdown" ref={dropdownRef} className="flex flex-col">
             {open && (
-              <div className="absolute right-0 mt-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+              <div className="absolute right-0 mt-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 ">
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                   <li>
                     <a
-                      href="#"
+                      href="/"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Dashboard
@@ -49,7 +68,7 @@ const Header = () => {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/settings"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Settings

@@ -3,7 +3,7 @@ import { MdDelete } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 
 function UnitOfMeasure() {
-  const [words, setWords] = useState(["Apple", "Banana", "Orange"]);
+  const [words, setWords] = useState(["M", "Cm", "mm"]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [addingNewWord, setAddingNewWord] = useState(false);
   const [newWord, setNewWord] = useState("");
@@ -58,13 +58,13 @@ function UnitOfMeasure() {
   };
 
   return (
-    <div className="h-max w-max p-8 rounded-xl">
-      <div className="py-4">
-        <table className="table-auto border-collapse border border-gray-300">
+    <div className="h-max w-max p-8 rounded-xl ">
+      <div className="py-4  ">
+        <table className="table-auto border-collapse border border-gray-300 ">
           <thead>
             <tr>
-              <th className="border w-64 border-gray-100 px-4 py-2 flex">
-                Name{" "}
+              <th className="border w-64 border-gray-100 px-4 py-2 flex max-[400px]:w-44">
+                Unit{" "}
                 <span className="m-1">
                   <IoIosArrowDown />
                 </span>

@@ -5,7 +5,7 @@ import { MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(window.innerWidth >= 400);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const toggleSubMenu = (index) => {
     setSubMenuOpen((prev) => ({
@@ -18,22 +18,24 @@ const Sidebar = () => {
     <aside
       className={`${
         open
-          ? "w-72 transition-all duration-500"
+          ? "w-72 transition-all duration-500  "
           : " w-0 lg:w-20 transition-all duration-500"
-      } bg-white border-r shadow-sm fixed lg:relative  top-0 bottom-0 z-50 ${
+      } bg-white border-r shadow-sm fixed lg:relative  top-0 bottom-0 z-50  ${
         open ? "overflow-y-auto " : ""
       } `}
     >
-      <nav className="h-full flex flex-col bg-white border-r shadow-sm ">
+      <nav className="h-full flex flex-col bg-white border-r shadow-sm  max-[400px]:text-[12px]">
         <div className="p-4 pb-2 flex justify-between items-center">
-          <img
-            src="https://img.logoipsum.com/297.svg"
-            className={`${!open && "hidden"}`}
-            alt="logo"
-          />
+          <div>
+            <img
+              src="https://img.logoipsum.com/297.svg"
+              className={`${!open && "hidden"} `}
+              alt="logo"
+            />
+          </div>
           <button
             onClick={() => setOpen((open) => !open)}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 max-[400px]:p-0"
           >
             {open ? (
               <svg
@@ -42,7 +44,7 @@ const Sidebar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 max-[400px]:w-4"
               >
                 <path
                   strokeLinecap="round"
@@ -57,7 +59,7 @@ const Sidebar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 max-[400px]:w-4"
               >
                 <path
                   strokeLinecap="round"

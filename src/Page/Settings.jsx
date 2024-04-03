@@ -69,7 +69,7 @@ function Settings() {
   return (
     <div>
       <Header />
-      <div className="p-16 grid grid-cols-4 gap-7">
+      <div className="p-14 grid grid-cols-4 gap-7 max-[400px]:grid-cols-1 max-[400px]:p-12">
         {cardsData.map((card, index) => (
           <Cards
             key={index}

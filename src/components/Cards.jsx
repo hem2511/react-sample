@@ -40,7 +40,7 @@ function Cards({ mainHeading, mainIcon, subHeadings }) {
   };
 
   return (
-    <div className="w-[300px] h-[350px] bg-gray-200 p-8 flex flex-col rounded-xl">
+    <div className="w-[300px] h-[350px] bg-gray-200 p-8 flex flex-col rounded-xl shadow-lg max-[400px]:pl-16 ">
       <div className="flex items-center pb-2 font-medium">
         {mainIcon}
         <span className="ml-2">{mainHeading}</span>
@@ -56,17 +56,17 @@ function Cards({ mainHeading, mainIcon, subHeadings }) {
         </div>
       ))}
       {showPopup && (
-        <div className="absolute top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center ">
-          <div className="bg-white overflow-y-scroll p-6 rounded-xl w-max h-5/6">
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center ">
+          <div className="bg-white overflow-y-scroll p-6 rounded-xl w-max h-5/6 ">
             <div className="flex justify-between">
-              <h2 className="font-semibold text-xl">
+              <h2 className="font-semibold text-xl ">
                 {selectedSubheading.text}
               </h2>
               <button className="text-3xl" onClick={() => setShowPopup(false)}>
                 <IoIosClose />
               </button>
             </div>
-            <div className="px-20">{renderSubheadingComponent()}</div>
+            <div className="px-">{renderSubheadingComponent()}</div>
           </div>
         </div>
       )}
