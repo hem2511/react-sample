@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
+import { Login } from "../../apis/AuthService";
 
 function UnitOfMeasure() {
   const [words, setWords] = useState(["M", "Cm", "mm"]);
@@ -56,6 +57,18 @@ function UnitOfMeasure() {
       handleSaveNewWord();
     }
   };
+
+
+  // const handleLogin = async () => {
+  //   try{
+  //     const loginresponse = await Login({"email":"unandhakumar2000@gmail.com","password":"Nandha1@"});
+  //     console.log(loginresponse.data);
+  //   } catch (error){
+  //     console.log(error);
+  //   }
+  // }
+
+  // handleLogin();
 
   return (
     <div className="h-max w-max p-8 rounded-xl ">
