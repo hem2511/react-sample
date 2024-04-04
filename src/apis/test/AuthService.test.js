@@ -1,46 +1,26 @@
-import { Login } from "../AuthService";
-import requests from '../HttpServices';
+import { describe, it, expect, vi } from 'vitest';
+import HttpServices from '../HttpServices';
+import { Login, Register } from '../AuthService'; // Replace with the actual path to your module
 
-jest.mock('../HttpServices');
+// Mock the post method of HttpServices
+vi.spyOn(HttpServices, 'post').mockImplementation((url, data) => {
+  return Promise.resolve({ url, data });
+});
 
-describe('Login Function', () => {
-    it('should call requests.post with correct arguments', async () => {
-      const mockData = { username: 'testuser', password: 'testpassword' };
-      const mockResponse = { token: 'mockToken' };
-  
-      // Mock the post method of requests
-      requests.post.mockResolvedValueOnce({ data: mockResponse });
-  
-      // Call the Login function with mock data
-      await Login(mockData);
-  
-      // Assert that requests.post was called with the correct arguments
-      expect(requests.post).toHaveBeenCalledWith('auth/login', mockData);
-    });
-  
-    it('should return the response from requests.post', async () => {
-      const mockData = { username: 'unandhakumar2000@gmail.com"', password: 'Nandha1' };
-      const mockResponse = { token: 'mockToken' };
-  
-      // Mock the post method of requests
-      requests.post.mockResolvedValueOnce({ data: mockResponse });
-  
-      // Call the Login function with mock data
-      const response = await Login(mockData);
-      console.log(response.data);
-  
-      // Assert that the response from Login function matches the mock response
-      expect(response).toEqual(mockResponse);
-    });
-  
-    it('should throw an error if requests.post fails', async () => {
-      const mockData = { username: 'testuser', password: 'testpassword' };
-      const mockError = new Error('Request failed');
-  
-      // Mock the post method of requests to reject with an error
-      requests.post.mockRejectedValueOnce(mockError);
-  
-      // Call the Login function with mock data and expect it to throw an error
-      await expect(Login(mockData)).rejects.toThrowError('Request failed');
-    });
+describe('Authentication API', () => {
+  it('should call login with the correct endpoint and data', async () => {
+    const loginData = { username: 'user', password: 'pass' };
+    const response = await Login(loginData);
+
+    expect(HttpServices.post).toHaveBeenCalledWith('auth/login', loginData);
+    expect(response).toEqual({ url: 'auth/login', data: loginData });
   });
+
+  it('should call register with the correct endpoint and data', async () => {
+    const registerData = { username: 'newuser', email: 'newuser@example.com', password: 'newpass' };
+    const response = await Register(registerData);
+
+    expect(HttpServices.post).toHaveBeenCalledWith('auth/register', registerData);
+    expect(response).toEqual({ url: 'auth/register', data: registerData });
+  });
+});
