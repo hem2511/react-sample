@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineDashboard } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { VscGraph } from "react-icons/vsc";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const dropdownRef = useRef(null);
@@ -22,8 +23,10 @@ const Header = () => {
     };
   }, []);
 
-  const handleCloseMenu = () => {
-    setOpen(false);
+  const handleSignOut = () => {
+    sessionStorage.setItem("isLoggedIn", "false");
+    // You may want to perform additional sign-out related tasks here
+    navigate("/signin"); // Redirect to sign-in page after sign out
   };
 
   return (
@@ -43,7 +46,7 @@ const Header = () => {
             </div>
             <div className="flex flex-col items-end ">
               <div className="text-md font-medium ">
-                <i class="fa-solid fa-gear"></i>Nandha Kumar
+                <i className="fa-solid fa-gear"></i>Nandha Kumar
               </div>
             </div>
             <button onClick={() => setOpen((open) => !open)}>
@@ -59,36 +62,36 @@ const Header = () => {
               <div className="absolute right-0 mt-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 ">
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                   <li>
-                    <a
-                      href="/"
+                    <Link
+                      to="/"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Dashboard
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/settings"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Earnings
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <Link
-                      to="/signin"
+                      to="/settings"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Settings
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Earnings
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleSignOut}
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Sign Out
-                    </Link>
+                    </button>
                   </li>
                 </ul>
               </div>

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Login } from "../apis/AuthService";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -10,6 +11,14 @@ function SignIn() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState("");
+
+  useEffect(() => {
+    const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -29,10 +38,11 @@ function SignIn() {
   };
 
   const validatePassword = () => {
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[a-zA-Z\d\W]{4,}$/;
     if (!passwordPattern.test(password)) {
       setPasswordError(
-        "Password must contain at least 8 characters, including uppercase, lowercase, and a digit"
+        "Password must contain at least 4 characters, including uppercase, lowercase, symbol and a digit"
       );
     } else {
       setPasswordError("");
@@ -43,17 +53,34 @@ function SignIn() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     validateEmail();
     validatePassword();
 
-    if (email === "mindplm@gmail.com" && password === "Password123") {
-      navigate("/");
+    try {
+      const postData = {
+        email: email,
+        password: password,
+      };
+      const loginResponse = await Login(postData);
+      console.log(loginResponse.data);
+      if (loginResponse.status === 200) {
+        sessionStorage.setItem("isLoggedIn", "true");
+        sessionStorage.setItem("Authorization", loginResponse.data.accessToken);
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response.status === 500) {
+        setLoginError("Please check your email and password.");
+        console.error("Bad credentials. Please check your email and password.");
+      }
+      if (error.response.status === 400) {
+        console.error("Empty");
+      } else {
+        console.error("Login failed:", error);
+      }
     }
-
-    setEmail("");
-    setPassword("");
   };
   return (
     <div className="flex justify-center h-screen items-center max-[400px]:-mt-20">
@@ -79,6 +106,10 @@ function SignIn() {
               value={email}
               onChange={handleEmailChange}
               onBlur={validateEmail}
+              onFocus={() => {
+                setEmailError("");
+                setLoginError("");
+              }}
               placeholder="Email"
             />
             {emailError && (
@@ -105,10 +136,18 @@ function SignIn() {
               onChange={handlePasswordChange}
               onBlur={validatePassword}
               placeholder="Password"
+              onFocus={() => {
+                setPasswordError("");
+                setLoginError("");
+              }}
             />
             <button
               type="button"
               onClick={togglePasswordVisibility}
+              onFocus={() => {
+                setPasswordError("");
+                setLoginError("");
+              }}
               className="absolute bg-white text-[#4d4d4d] -my-8 right-4 max-[400px]:text-[12px] max-[400px]:-my-6 max-[400px]:right-3 "
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -120,6 +159,11 @@ function SignIn() {
                 data-testid="passerror"
               >
                 {passwordError}
+              </div>
+            )}
+            {loginError && (
+              <div className="error rounded text-xs flex justify-start cursor-default text-red-500 mb-2">
+                {loginError}
               </div>
             )}
           </div>
