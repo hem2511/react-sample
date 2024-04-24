@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 
 import Layout from "../../Layout/Layout";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+
+    if (!isLoggedIn) {
+      // If isLoggedIn token is not present or set to false, create one and navigate to /signin
+      sessionStorage.setItem("isLoggedIn", "false");
+      navigate("/signin");
+    }
+  }, [navigate]);
   return (
     <>
       {/* <Header/> */}
