@@ -15,6 +15,7 @@ import UnitOfMeasure from "./components/SettingsPages/UnitOfMeasure";
 import Operation from "./components/SettingsPages/Operation";
 import Resource from "./components/SettingsPages/Resource";
 import Location from "./components/SettingsPages/Location";
+import Dropdown from "./Page/Dropdown";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/operation" element={<Operation />} />
           <Route exact path="/resource" element={<Resource />} />
           <Route exact path="/location" element={<Location />} />
+          <Route exact path="/dropdown" element={<Dropdown />} />
         </Routes>
       </BrowserRouter>
     </>
